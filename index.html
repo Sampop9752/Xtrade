@@ -22,10 +22,10 @@
         color: #333;
       }
       
-      form  {
+      /* form  {
         max-width: 400px;
         margin: 20px auto;
-      }
+      } */
       
       label , select {
         display: block;
@@ -151,7 +151,17 @@ Oman	OM	OMN	512  || 00 968
   <button type="button" onclick="submitLead()">Submit Lead</button>
 </form>
 
-
+<h1>Lead Status Check :</h1>
+<form action=https://mtmaffiliates.com/generateapi.aspx method='post' target="_self">
+  <input type='' name='type' value='3' />
+  <input type='' name='did' value=1008278 />
+  <input type='' name='token' value=42D0BDE115 />
+  <input type='' name='leadid' value='0' />
+  <input type='' name='fdate' value='01/01/1900' />
+  <input type='' name='tdate' value='01/01/2100' />
+<input type='' name='TranType' value='deposit' />
+<button type='button'>Show List</button>
+</form>
 
   <script>
     document.getElementById('countryCodeISO2').addEventListener("change", function () {
