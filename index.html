@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xtrade Lead Creation</title>
+  <style>/* Reset some default browser styles */
+    body, h1, form, label, input, button , select {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+      
+      /* Apply some basic styles for readability */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+        padding: 20px;
+      }
+      
+      h1 {
+        color: #333;
+      }
+      
+      form  {
+        max-width: 400px;
+        margin: 20px auto;
+      }
+      
+      label , select {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+      }
+      
+      input , select {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+      
+      button {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      
+      button:hover {
+        background-color: #45a049;
+      }
+      @media (max-width: 600px) {
+        body {
+          padding: 10px;
+        }
+      
+        form {
+          max-width: 100%;
+        }
+      
+        button {
+          width: 100%;
+        }
+      }</style>
+</head>
+<body>
+  <h1>Xtrade Lead Creation Form</h1>
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br>
+
+  <label for="fullName">Full Name:</label>
+  <input type="text" id="fullName" name="fullName" required><br>
+
+  <label for="phoneAreaCode"></label>
+  <input type="text" id="phoneAreaCode" name="phoneAreaCode" hidden><br>
+
+
+  <label for="countryCodeISO2">Country Code (ISO 2):</label>
+  <select type="text" id="countryCodeISO2" name="countryCodeISO2" required><br>
+    <option value="AE">AE</option>
+    <option value="QA">QA</option>
+    <option value="KW">KW</option>
+    <option value="OM">OM</option>
+    <option value="SA">SA</option>
+    <option value="BH">BH</option>
+  </select>
+
+  <label for="phoneCountryCode">Phone Country Code:</label>
+  <select type="text" id="phoneCountryCode" name="phoneCountryCode" required><br>
+  <option value="+971">+971</option>
+  <option value="+974">+974</option>
+  <option value="+965">+965</option>
+  <option value="+968">+968</option>
+  <option value="+966">+966</option>
+  <option value="+973">+973</option>
+  <!-- 
+Bahrain	BH	BHR	048 || 00 973 
+Saudi Arabia	SA	SAU	682  || 00 966 
+United Arab Emirates (the)	AE	ARE	784  ||  0 
+Qatar	QA	QAT	634  || 00 974 
+Kuwait	KW	KWT	414  || 00 965 
+Oman	OM	OMN	512  || 00 968 
+-->
+</select>
+
+
+
+  <label for="phoneNumber">Phone Number:</label>
+  <input type="number" id="phoneNumber" name="phoneNumber" required><br>
+
+  
+  
+
+  <label for="language">Language:</label>
+  <input type="text" id="language" name="language" value="ar"><br>
+
+ 
+  <label for="affTags">BotName:</label>
+  <select type="text" id="affTags" name="affTags" value="BotName" required><br>
+  <option value="Sara">Sara</option>
+  <option value="Aryam">Aryam</option>
+  <option value="manal">manal</option>
+  <option value="layal">layal</option>
+  <option value="miral">miral</option>
+  <option value=""></option>
+
+  <label for="affTrack"></label>
+  <input type="text" id="affTrack" name="affTrack" value="1008278" required hidden><br>
+
+  <label for="affToken"></label>
+  <input type="text" id="affToken" name="affToken" value="42D0BDE115" required hidden><br>
+
+
+
+  <button type="button" onclick="submitLead()">Submit Lead</button>
+</form>
+
+
+
+  <script>
+    document.getElementById('countryCodeISO2').addEventListener("change", function () {
+    document.getElementById('phoneCountryCode').selectedIndex = document.getElementById('countryCodeISO2').selectedIndex;
+}, false);
+document.getElementById('phoneCountryCode').addEventListener("change", function () {
+    document.getElementById('countryCodeISO2').selectedIndex = document.getElementById('phoneCountryCode').selectedIndex;
+}, false);
+
+    function submitLead() {
+    const leadData = {
+      email: document.getElementById('email').value,
+      fullName: document.getElementById('fullName').value,
+      countryCodeISO2: document.getElementById('countryCodeISO2').value,
+      phoneCountryCode: document.getElementById('phoneCountryCode').value,
+      phoneAreaCode: document.getElementById('phoneAreaCode').value,
+      phoneNumber: document.getElementById('phoneNumber').value,
+      language: document.getElementById('language').value,
+      affTags: document.getElementById('affTags').value,
+      affTrack: document.getElementById('affTrack').value,
+      affToken: document.getElementById('affToken').value,
+    };
+
+    console.log(leadData)
+
+   // Make a POST request to the server
+    fetch('https://xtrade-hrin.onrender.com/api/lead/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Server response:', data);
+      if (data.success) {
+    alert('Lead submitted successfully!');
+  } else {
+    alert('Lead submission failed: ' + data.error);
+  }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    });
+  }
+
+  
+
+  </script>
+</body>
+</html>
+ 
