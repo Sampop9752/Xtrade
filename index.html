@@ -142,13 +142,16 @@ Oman	OM	OMN	512  || 00 968
 
   <label for="affTrack"></label>
   <input type="text" id="affTrack" name="affTrack" value="1008278" required hidden><br>
+  <input type="text" id="affTrackUAE" name="affTrack" value="1707096" required hidden><br>
 
   <label for="affToken"></label>
   <input type="text" id="affToken" name="affToken" value="42D0BDE115" required hidden><br>
-
+  <input type="text" id="affTokenUAE" name="affToken" value="2E9B3930A3" required hidden><br>
+  
 
 
   <button type="button" onclick="submitLead()">Submit Lead</button>
+  <button type="button" onclick="submitLeadUAE()">Submit Lead UAE</button>
 </form>
 </br></br></br></br>
 
@@ -212,7 +215,44 @@ document.getElementById('phoneCountryCode').addEventListener("change", function 
     });
   }
 
-  
+  function submitLeadUAE() {
+    const leadData = {
+      email: document.getElementById('email').value,
+      fullName: document.getElementById('fullName').value,
+      countryCodeISO2: document.getElementById('countryCodeISO2').value,
+      phoneCountryCode: document.getElementById('phoneCountryCode').value,
+      phoneAreaCode: document.getElementById('phoneAreaCode').value,
+      phoneNumber: document.getElementById('phoneNumber').value,
+      language: document.getElementById('language').value,
+      affTags: document.getElementById('affTags').value,
+      affTrack: document.getElementById('affTrackUAE').value,
+      affToken: document.getElementById('affTokenUAE').value,
+    };
+
+    console.log(leadData)
+
+   // Make a POST request to the server
+    fetch('https://xtrade-hrin.onrender.com/api/lead/create', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(leadData),
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log('Server response:', data);
+      if (data.success) {
+    alert('Lead submitted successfully!');
+  } else {
+    alert('Lead submission failed: ' + data.error);
+  }
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      alert('An error occurred. Please try again.');
+    });
+  }
 
   </script>
 </body>
