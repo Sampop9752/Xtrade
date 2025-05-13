@@ -70,6 +70,9 @@
 </head>
 <body>
   <h1>Xtrade Lead Creation Form</h1>
+  <label for="userIp">userIp:</label>
+  <input type="userIp" id="userIp" name="userIp" required><br>
+
   <label for="email">Email:</label>
   <input type="email" id="email" name="email" required><br>
 
@@ -136,7 +139,9 @@ Oman	OM	OMN	512  || 00 968
   <option value="sanaa">sanaa</option>
   <option value="balkes">balkes</option>
   <option value="shahad">shahad</option>
-  <option value=""></option>
+  <option value="sanaa">sanaa</option>
+  <option value="masheal">masheal</option>
+  <option value="eman">eman</option>
   <option value=""></option>
 
 
@@ -189,6 +194,7 @@ document.getElementById('phoneCountryCode').addEventListener("change", function 
 
     function submitLead() {
     const leadData = {
+      userIp: document.getElementById('userIp').value,
       email: document.getElementById('email').value,
       fullName: document.getElementById('fullName').value,
       countryCodeISO2: document.getElementById('countryCodeISO2').value,
@@ -228,6 +234,7 @@ document.getElementById('phoneCountryCode').addEventListener("change", function 
 
   function submitLeadUAE() {
     const leadData = {
+      userIp: document.getElementById('userIp').value,
       email: document.getElementById('email').value,
       fullName: document.getElementById('fullName').value,
       countryCodeISO2: document.getElementById('countryCodeISO2').value,
