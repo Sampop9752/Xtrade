@@ -32,7 +32,6 @@ try {
 app.post('/api/lead/create', async (req, res) => {
   try {
     const {
-      userIp,
       email,
       fullName,
       countryCodeISO2,
@@ -44,6 +43,7 @@ app.post('/api/lead/create', async (req, res) => {
       affTrack,
       affToken,
       affTags,
+      userIp,
     } = req.body;
 
     // Validate required fields
