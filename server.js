@@ -47,7 +47,7 @@ app.post('/api/lead/create', async (req, res) => {
     } = req.body;
 
     // Validate required fields
-    if (!email || !fullName || !countryCodeISO2 || !phoneCountryCode || !phoneNumber || !language || !affTrack || !affToken) {
+    if (!email || !fullName || !userIp || !countryCodeISO2 || !phoneCountryCode || !phoneNumber || !language || !affTrack || !affToken) {
       return res.status(400).json({ success: false, error: 'Missing required fields' });
     }
 
