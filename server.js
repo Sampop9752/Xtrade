@@ -83,6 +83,7 @@ app.post('/api/lead/create', async (req, res) => {
       // Prepare new lead data
       const newLead = {
         AccountID: responseData.accountId,
+        UserIp : userIp,
         Email: email,
         FullName: fullName,
         CountryCodeISO2: countryCodeISO2,
@@ -153,6 +154,7 @@ app.post('/api/lead/create', async (req, res) => {
       // Even if there is an error, still update the Excel file with the lead
       const newLead = {
         AccountID: 'N/A',  // No account ID since the lead was rejected
+        UserIp : userIp,
         Email: email,
         FullName: fullName,
         CountryCodeISO2: countryCodeISO2,
