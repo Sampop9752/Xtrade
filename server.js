@@ -28,7 +28,7 @@ const filePath = path.join(__dirname, 'leads.xlsx');
       { header: 'Age', key: 'age' },
       { header: 'Arabic', key: 'arabic' },
       { header: 'Trading Interest', key: 'tradingInterest' },
-      { header: 'IP Address', key: 'ipAddress' },
+      { header: 'userIp', key: 'userIp' },
       { header: 'Affiliate Token', key: 'affiliateToken' },
     ];
     await workbook.xlsx.writeFile(filePath);
@@ -48,8 +48,8 @@ app.post('/submit', async (req, res) => {
       affiliateToken,
     } = req.body;
 
-    // ✅ Get IP address from request
-    const userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    // ✅ Get userIp from request
+    const userIp = req.headers['x-forwarded-for'] || req.socket.remoteAddress || req.ip;
     console.log('User IP:', userIp);
 
     const worksheet = workbook.getWorksheet('Leads');
@@ -62,7 +62,7 @@ app.post('/submit', async (req, res) => {
       age,
       arabic,
       tradingInterest,
-      ipAddress: userIp, // ✅ Save the actual IP here
+      userIp: userIp, // ✅ Save the actual IP here
       affiliateToken,
     });
 
